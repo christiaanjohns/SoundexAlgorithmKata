@@ -43,5 +43,7 @@ TEST_F(SoundexEncoding, PadsWithZerosToEnsureThreeDigits)
 TEST_F(SoundexEncoding, ReplaceConsonantsWithAppropriateDigits)
 {
     ASSERT_THAT(soundex.encode("Ab"), Eq("A100"));
+    ASSERT_THAT(soundex.encode("Ar"), Eq("A600"));
+    ASSERT_THAT(soundex.encode("Al"), Eq("A400"));
 }
 
