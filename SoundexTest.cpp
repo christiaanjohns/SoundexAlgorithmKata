@@ -1,42 +1,4 @@
-#include <iostream>
-#include <string>
-using namespace std;
-
-class Soundex
-{
-    /**
-     * @brief pad word to 4 digits
-     * @param word - input string
-     * @return - padded string
-     */
-    string zeroPad(const string& word) const
-    {
-        /*if(word.size() == 3)
-        {
-            return word + "0";
-        }
-        else if(word.size() == 2)
-        {
-            return word + "00";
-        }
-        else if(word.size() == 1)
-        {
-            return word + "000";
-        } else return word;*/
-        return word + "000";
-    }
-public:
-    /**
-     * @brief Encode string to Soundex Algorithm format
-     * @param word - string to code
-     * @return - encoded string
-     */
-    string encode(const string& word) const
-    {
-        return zeroPad(word);
-    }
-};
-
+//Rules of Algorithm
 /* Rules
 1. Retain the first letter of the name and drop all other occurrences of a, e, i, o, u, y, h, w.
 2. Replace consonants with digits as follows (after the first letter):
@@ -52,28 +14,29 @@ public:
 4. If you have too few letters in your word that you can't assign three numbers, append with zeros until there are three numbers.
    If you have more than 3 letters, just retain the first 3 numbers.
 */
-
-
 //TESTS
 #include "gmock/gmock.h"
+#include "Soundex.h"
+
 using::testing::Eq;
-TEST(SoundexEncoding, RetainsSoleLetterOfOneLetterWord)
+// Create a class fixture
+class SoundexEncoding: public testing::Test
 {
-    // Arrange
-   Soundex soundex;
-   // Act
-   auto encode = soundex.encode("A");
-   // Assert
-   ASSERT_THAT(encode, Eq("A000"));
+public:
+    Soundex soundex;
+};
+
+TEST_F(SoundexEncoding, RetainsSoleLetterOfOneLetterWord)
+{
+    // Arrange @class fixture
+   // Act & Assert
+   ASSERT_THAT(soundex.encode("A"), Eq("A000"));
 }
 
-TEST(SoundexEncoding, PadsWithZerosToEnsureThreeDigits)
+TEST_F(SoundexEncoding, PadsWithZerosToEnsureThreeDigits)
 {
-    // Arrange
-    Soundex soundex;
-    // Act
-    auto encode = soundex.encode("I");
-    // Assert
-    ASSERT_THAT(encode, Eq("I000"));
+    // Arrange @class fixture
+    // Act & Assert
+    ASSERT_THAT(soundex.encode("I"), Eq("I000"));
 }
 
