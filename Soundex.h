@@ -20,6 +20,7 @@ private:
     string encodeDigits(const string& word)const;
     bool isComplete(const string& encoding)const;
     string lastDigit(const string& encoding)const;
+    string upperFront(const string& word) const;
 public:
     string encode(const string& word) const;
     string encodeDigit(char letter)const;

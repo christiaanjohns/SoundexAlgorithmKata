@@ -18,7 +18,8 @@
 #include "gmock/gmock.h"
 #include "Soundex.h"
 
-using::testing::Eq;
+using namespace testing;
+
 // Create a class fixture
 class SoundexEncoding: public testing::Test
 {
@@ -83,4 +84,11 @@ TEST_F(SoundexEncoding, CombineDuplicateEncodings)
     ASSERT_THAT(soundex.encodeDigit('d'), Eq(soundex.encodeDigit('t')));
 
     ASSERT_THAT(soundex.encode("Abfxgdt"), Eq("A123"));
+}
+
+TEST_F(SoundexEncoding, UpperCaseFirstLetter)
+{
+    // Arrange @class fixture
+    // Act & Assert
+    ASSERT_THAT(soundex.encode("abcd"), StartsWith("A"));
 }
