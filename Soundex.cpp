@@ -21,7 +21,7 @@ string Soundex::zeroPad(const string& word) const
     */
 string Soundex::encode(const string& word) const
 {
-    return zeroPad(head(word) + encodeDigits(word));
+    return zeroPad(head(word) + encodeDigits(tail(word)));
 }
 /**
  * @brief - Extract the first char of the string
@@ -33,19 +33,27 @@ string Soundex::head(const string &word) const
     return word.substr(0,1);
 }
 /**
+ * @brief - Return all but the first character
+ * @param word - input string
+ * @return - string from 2:End
+ */
+string Soundex::tail(const string &word) const
+{
+    return word.substr(1); //Substring funct - if you only pass one param, it will take from that index to the end of word
+}
+/**
  * @brief - Encode the string into digits using Soundex Algorithm rules
  * @param word - input string
  * @return - encoded string
  */
 string Soundex::encodeDigits(const string &word) const
 {
-    if(word.length() > 1)
-    {
-        return encodeDigit(word[1]);
-    }
-    else
+    if(word.empty())
     {
         return "";
+    } else
+    {
+        return encodeDigit(word.front());
     }
 }
 /**
