@@ -51,10 +51,13 @@ string Soundex::encodeDigits(const string &word) const
     if(word.empty())
     {
         return "";
-    } else
-    {
-        return encodeDigit(word.front());
     }
+    string encoding;
+    for (auto letter : word)
+    {
+        encoding += encodeDigit(letter);
+    }
+
 }
 /**
  * @brief - Encode single digit
