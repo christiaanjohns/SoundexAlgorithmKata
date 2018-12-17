@@ -48,16 +48,16 @@ string Soundex::tail(const string &word) const
  */
 string Soundex::encodeDigits(const string &word) const
 {
-    if(word.empty())
-    {
-        return "";
-    }
     string encoding;
     for (auto letter : word)
     {
+        if(isComplete(encoding))
+        {
+            break;
+        }
         encoding += encodeDigit(letter);
     }
-
+    return encoding;
 }
 /**
  * @brief - Encode single digit
@@ -80,4 +80,13 @@ string Soundex::encodeDigit(char letter) const
     auto it = encoding.find(letter);
     return it == encoding.end() ? "" : it->second;
 
+}
+/**
+ * @brief Return true or false when the encoding string reaches maximum size
+ * @param encoding - input string
+ * @return - True for complete, false otherwise
+ */
+bool Soundex::isComplete(const string &encoding) const
+{
+    return encoding.length() == MaxCodeLength -1;
 }

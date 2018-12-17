@@ -59,6 +59,7 @@ TEST_F(SoundexEncoding, IgnoreNonAlphabetics)
 //DISABLED_ inserted before the test name will disable test, so it does not run
 // use it when you need to refactor your code, then you can re-enable by removing
 // DISABLED_ keyword when ready to have test run
+
 TEST_F(SoundexEncoding, ReplaceMultipleConsonantsWithDigits)
 {
     // Arrange @class fixture
@@ -66,3 +67,9 @@ TEST_F(SoundexEncoding, ReplaceMultipleConsonantsWithDigits)
     ASSERT_THAT(soundex.encode("Acdl"), Eq("A234"));
 }
 
+TEST_F(SoundexEncoding, LimitLengthToFourCharacters)
+{
+    // Arrange @class fixture
+    // Act & Assert
+    ASSERT_THAT(soundex.encode("Dcdlb").length(), Eq(4u));
+}
