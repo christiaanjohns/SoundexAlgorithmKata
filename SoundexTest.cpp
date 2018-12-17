@@ -42,8 +42,17 @@ TEST_F(SoundexEncoding, PadsWithZerosToEnsureThreeDigits)
 
 TEST_F(SoundexEncoding, ReplaceConsonantsWithAppropriateDigits)
 {
+    // Arrange @class fixture
+    // Act & Assert
     ASSERT_THAT(soundex.encode("Ab"), Eq("A100"));
     ASSERT_THAT(soundex.encode("Ar"), Eq("A600"));
     ASSERT_THAT(soundex.encode("Al"), Eq("A400"));
+}
+
+TEST_F(SoundexEncoding, IgnoreNonAlphabetics)
+{
+    // Arrange @class fixture
+    // Act & Assert
+    ASSERT_THAT(soundex.encode("A#"), Eq("A000"));
 }
 

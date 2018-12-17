@@ -64,5 +64,9 @@ string Soundex::encodeDigit(char letter) const
             {'r', "6"}
     };
     // Find the letter in the map and return the associated value
-    return encoding.find(letter)->second;
+    // If you reach the end of the map and you have no match, then return an empty string, otherwise
+    // return the value from the map that matches the passed in key.
+    auto it = encoding.find(letter);
+    return it == encoding.end() ? "" : it->second;
+
 }
