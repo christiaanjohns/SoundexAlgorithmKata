@@ -23,3 +23,24 @@ TEST(ATweet, IsNotEqualToAnotherWhenMessageAndUserAreEqual)
     Tweet b("msg B", "@user2");
     ASSERT_TRUE(a != b);
 }
+
+TEST(ATweet, IsLessThanWhenUserAndMessageAre)
+{
+    Tweet a("msg", "@user1");
+    Tweet b("msg", "@user2");
+    ASSERT_THAT(a, Lt(b)); //Lt = less than
+}
+
+TEST(ATweet, IsLessThanWhenUserIsEqualAndMessageIsLessThan)
+{
+    Tweet a("msgA", "@user");
+    Tweet b("msgB", "@user");
+    ASSERT_THAT(a, Lt(b)); //Lt = less than
+}
+
+TEST(ATweet, CanCopyConstructed)
+{
+    Tweet a("msgA", "@user");
+    Tweet b(a);
+    ASSERT_THAT(a, Eq(b));
+}

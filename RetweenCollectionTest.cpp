@@ -55,10 +55,18 @@ class ARetweetCollectionWithOneTweet: public Test
 {
 public:
     RetweetCollection collection;
+    Tweet *tweet;
     void SetUp() override
     {
-        collection.add(Tweet());
+        tweet = new Tweet("msg", "@user");
+        collection.add(*tweet);
     };
+
+    void TearDown() override
+    {
+        delete tweet;
+        tweet = nullptr;
+    }
 };
 
 TEST_F(ARetweetCollectionWithOneTweet, IsNoLongerEmpty)
