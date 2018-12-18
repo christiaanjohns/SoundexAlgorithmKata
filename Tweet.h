@@ -15,7 +15,13 @@ public:
 
     bool operator<(const Tweet &rhs)const;
 
+    bool operator==(const Tweet &rhs) const;
+
+    bool operator!=(const Tweet &rhs) const;
+
     const string &getUser_() const;
+
+    const string &getMessage_() const;
 };
 
 
