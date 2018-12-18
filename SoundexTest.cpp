@@ -92,3 +92,17 @@ TEST_F(SoundexEncoding, UpperCaseFirstLetter)
     // Act & Assert
     ASSERT_THAT(soundex.encode("abcd"), StartsWith("A"));
 }
+
+TEST_F(SoundexEncoding, IgnoreSpecifiedLettersOfRuleOne)
+{
+    // Arrange @class fixture
+    // Act & Assert
+    ASSERT_THAT(soundex.encode("BaAeEiIoOuUhHyYwWcdl"), StartsWith("B234"));
+}
+
+TEST_F(SoundexEncoding, IgnoreCaseWhenEncodingConsonants)
+{
+    // Arrange @class fixture
+    // Act & Assert
+    ASSERT_THAT(soundex.encode("BCDL"), soundex.encode("Bcdl"));
+}

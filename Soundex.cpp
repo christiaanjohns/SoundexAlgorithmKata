@@ -55,7 +55,8 @@ string Soundex::encodeDigits(const string &word) const
         {
             break;
         }
-        if(encodeDigit(letter) != lastDigit(encoding))
+        auto digit = encodeDigit(letter);
+        if(digit != NotADigit && digit != lastDigit(encoding))
         {
             encoding += encodeDigit(letter);
         }
@@ -80,8 +81,8 @@ string Soundex::encodeDigit(char letter) const
     // Find the letter in the map and return the associated value
     // If you reach the end of the map and you have no match, then return an empty string, otherwise
     // return the value from the map that matches the passed in key.
-    auto it = encoding.find(letter);
-    return it == encoding.end() ? "" : it->second;
+    auto it = encoding.find(lower(letter));
+    return it == encoding.end() ? NotADigit : it->second;
 
 }
 /**
@@ -93,7 +94,6 @@ bool Soundex::isComplete(const string &encoding) const
 {
     return encoding.length() == MaxCodeLength -1;
 }
-
 /**
  * @brief Keep track of the last digit in the coding string
  * @param encoding - input string
@@ -103,7 +103,7 @@ string Soundex::lastDigit(const string &encoding) const
 {
     if (encoding.empty())
     {
-        return "";
+        return NotADigit;
     }
     return std::string(1, encoding.back());
 }
@@ -115,4 +115,13 @@ string Soundex::lastDigit(const string &encoding) const
 string Soundex::upperFront(const string &word) const
 {
     return std::string (1, toupper(static_cast<unsigned char>(word.front())));
+}
+/**
+ * @brief Return the lower case letter of the input char
+ * @param c - input char
+ * @return - lowercase of input char
+ */
+char Soundex::lower(char c) const
+{
+    return tolower(static_cast<unsigned char>(c));
 }
